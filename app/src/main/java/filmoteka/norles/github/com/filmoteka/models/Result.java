@@ -48,6 +48,8 @@ private Integer voteCount;
     @Expose
     private String releaseDate;
 
+    private final String BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
+
     public Integer getVoteCount() {
         return voteCount;
     }
@@ -97,7 +99,7 @@ private Integer voteCount;
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return BASE_IMG_URL+ posterPath;
     }
 
     public void setPosterPath(String posterPath) {
