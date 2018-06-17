@@ -5,4 +5,5 @@
     <string name="exit">Wyjdź</string>
     <string name="search">Znajdź</string>
     <string name="favourites">Ulubione</string>
+    <string name="add_to_fav">Dodaj do ulubionych</string>
 </resources>
