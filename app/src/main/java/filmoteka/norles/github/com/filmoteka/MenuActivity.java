@@ -1,5 +1,6 @@
 package filmoteka.norles.github.com.filmoteka;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,8 @@ public class MenuActivity extends AppCompatActivity {
     private LinearLayout menu_2;
 
     private LinearLayout menu_exit;
+
+    private MenuActivity instance = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class MenuActivity extends AppCompatActivity {
         menu_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "opcja 1");
+                changeActivity(MainActivity.class);
             }
         });
         menu_2.setOnClickListener(new View.OnClickListener() {
@@ -46,5 +49,10 @@ public class MenuActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void changeActivity(Class<?> activity){
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
     }
 }
