@@ -15,6 +15,7 @@ public class MenuActivity extends AppCompatActivity {
     private LinearLayout menu_2;
     private LinearLayout menu_3;
     private LinearLayout menu_4;
+    private LinearLayout menu_5;
 
     private LinearLayout menu_exit;
 
@@ -31,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
         menu_2 = findViewById(R.id.menu_2);
         menu_3 = findViewById(R.id.menu_3);
         menu_4 = findViewById(R.id.menu_4);
+        menu_5 = findViewById(R.id.menu_5);
         menu_exit = findViewById(R.id.menu_exit);
 
         initViews();
@@ -52,10 +54,16 @@ public class MenuActivity extends AppCompatActivity {
         menu_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeActivity(SearchActivity.class);
+                changeActivity(TvActivity.class);
             }
         });
         menu_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeActivity(SearchActivity.class);
+            }
+        });
+        menu_5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeActivity(FavouritesActivity.class);

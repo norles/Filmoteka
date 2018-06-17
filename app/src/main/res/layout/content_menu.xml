@@ -67,6 +67,27 @@
             <ImageView
                     android:layout_width="90dp"
                     android:layout_height="90dp"
+                    android:src="@drawable/ic_tv"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/menu_left_padding"
+                    android:textSize="@dimen/menu_text_size"
+                    android:text="@string/best_tv_shows"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/menu_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/cardview_light_background">
+
+            <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:src="@drawable/ic_search"/>
 
             <TextView
@@ -78,7 +99,7 @@
         </LinearLayout>
 
         <LinearLayout
-                android:id="@+id/menu_4"
+                android:id="@+id/menu_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
