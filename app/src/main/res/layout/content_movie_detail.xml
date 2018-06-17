@@ -11,14 +11,14 @@
 
 
     <ImageView
-            android:id="@+id/thumbnail"
+            android:id="@+id/movie_detail_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/placeholder"
             />
 
     <TextView
-            android:id="@+id/title"
+            android:id="@+id/movie_detail_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nazwa filmu"/>
