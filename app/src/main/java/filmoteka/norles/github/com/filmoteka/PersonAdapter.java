@@ -1,6 +1,7 @@
 package filmoteka.norles.github.com.filmoteka;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +35,8 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
     public void onBindViewHolder(PersonViewHolder holder, int position) {
         PersonItem person = people.get(position);
 
+        holder.id = person.getId();
+
         holder.name.setText(person.getName());
 
         Glide.with(mContext)
@@ -51,6 +54,8 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
     class PersonViewHolder extends RecyclerView.ViewHolder {
 
+        public Integer id;
+
         public TextView name;
         public ImageView img;
 
@@ -63,7 +68,9 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("ITEM", name.getText().toString());
+                    Intent intent = new Intent(mContext, PersonDetailActivity.class);
+                    intent.putExtra("id",id);
+                    mContext.startActivity(intent);
                 }
             });
         }

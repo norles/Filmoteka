@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".MovieDetailActivity">
         </activity>
+        <activity android:name=".PersonDetailActivity">
+        </activity>
     </application>
 
 </manifest>
