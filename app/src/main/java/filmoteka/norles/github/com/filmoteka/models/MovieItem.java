@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Result {@SerializedName("vote_count")
+public class MovieItem {@SerializedName("vote_count")
 @Expose
 private Integer voteCount;
     @SerializedName("id")

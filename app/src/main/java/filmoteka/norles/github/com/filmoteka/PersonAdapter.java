@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import filmoteka.norles.github.com.filmoteka.models.PersonItem;
-import filmoteka.norles.github.com.filmoteka.models.Result;
 
 import java.util.List;
 

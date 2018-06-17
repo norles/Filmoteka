@@ -1,6 +1,7 @@
 package filmoteka.norles.github.com.filmoteka;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,16 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import filmoteka.norles.github.com.filmoteka.models.Result;
+import filmoteka.norles.github.com.filmoteka.models.MovieItem;
 
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private Context mContext;
-    private List<Result> results;
+    private List<MovieItem> results;
 
-    public MovieAdapter(Context mContext, List<Result> results) {
+    public MovieAdapter(Context mContext, List<MovieItem> results) {
         this.mContext = mContext;
         this.results = results;
     }
@@ -32,7 +33,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
-        Result result = results.get(position);
+        MovieItem result = results.get(position);
 
         holder.title.setText(result.getOriginalTitle());
 
@@ -63,7 +64,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Log.d("ITEM", title.getText().toString());
+                    Intent intent = new Intent(mContext, MovieDetailActivity.class);
+                    mContext.startActivity(intent);
                 }
             });
         }

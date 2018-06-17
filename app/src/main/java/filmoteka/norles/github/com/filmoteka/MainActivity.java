@@ -10,14 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ProgressBar;
 import filmoteka.norles.github.com.filmoteka.models.MovieResponse;
-import filmoteka.norles.github.com.filmoteka.models.Result;
+import filmoteka.norles.github.com.filmoteka.models.MovieItem;
 import filmoteka.norles.github.com.filmoteka.network.Client;
 import filmoteka.norles.github.com.filmoteka.network.MovieService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
-    private List<Result> results;
+    private List<MovieItem> results;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()){
-                    List<Result> results = response.body().getResults();
+                    List<MovieItem> results = response.body().getResults();
 
                     recyclerView.setAdapter(new MovieAdapter(getApplicationContext(), results));
                     recyclerView.smoothScrollToPosition(0);
