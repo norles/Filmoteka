@@ -1,9 +1,6 @@
 package filmoteka.norles.github.com.filmoteka.network;
 
-import filmoteka.norles.github.com.filmoteka.models.MovieDetail;
-import filmoteka.norles.github.com.filmoteka.models.MovieResponse;
-import filmoteka.norles.github.com.filmoteka.models.PeopleResponse;
-import filmoteka.norles.github.com.filmoteka.models.PersonDetail;
+import filmoteka.norles.github.com.filmoteka.models.*;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -28,5 +25,12 @@ public interface MovieService {
 
     @GET("person/popular")
     Call<PeopleResponse> getPopularPeople(@Query("api_key") String api_key);
+
+
+    @GET("search/movie")
+    Call<SearchResult> getSearchResults(
+            @Query("api_key") String api_key,
+            @Query("query") String query
+    );
 
 }
