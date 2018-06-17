@@ -29,6 +29,7 @@
                 android:text="Nazwa filmu"/>
 
         <Button
+                android:id="@+id/favourite_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignEnd="@+id/movie_detail_title"
