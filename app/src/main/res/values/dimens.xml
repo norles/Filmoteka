@@ -2,4 +2,5 @@
 <resources>
     <dimen name="menu_text_size">30sp</dimen>
     <dimen name="menu_left_padding">30sp</dimen>
+    <dimen name="person_img_height">250sp</dimen>
 </resources>
