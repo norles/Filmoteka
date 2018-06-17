@@ -9,24 +9,57 @@
         tools:context="filmoteka.norles.github.com.filmoteka.activities.MovieDetailActivity"
         tools:showIn="@layout/activity_movie_detail">
 
-
-    <ImageView
-            android:id="@+id/movie_detail_thumbnail"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/placeholder"
-            />
+            android:orientation="horizontal">
+
+        <ImageView
+                android:id="@+id/movie_detail_thumbnail"
+                android:layout_width="@dimen/detail_image_width"
+                android:layout_height="@dimen/detail_image_height"
+                android:src="@drawable/placeholder_movie_detail"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/movie_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/movie_detail_title_size"
+                    android:textColor="@color/black"
+                    android:text="{movie_name}"/>
+
+            <TextView
+                    android:id="@+id/movie_detail_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/movie_detail_text_size"
+                    android:text="{movie_duration}"/>
+
+            <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:id="@+id/movie_detail_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/movie_detail_text_size"
+                        android:textColor="@color/black"
+                        android:text="{movie_description}"/>
+            </ScrollView>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-        <TextView
-                android:id="@+id/movie_detail_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Nazwa filmu"/>
 
         <Button
                 android:id="@+id/favourite_button"
