@@ -83,6 +83,8 @@ public class MovieDetail {
     @Expose
     private Integer voteCount;
 
+    private final String BASE_IMG_URL = "https://image.tmdb.org/t/p/w500";
+
     public Boolean getAdult() {
         return adult;
     }
@@ -180,7 +182,7 @@ public class MovieDetail {
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return BASE_IMG_URL+posterPath;
     }
 
     public void setPosterPath(String posterPath) {
