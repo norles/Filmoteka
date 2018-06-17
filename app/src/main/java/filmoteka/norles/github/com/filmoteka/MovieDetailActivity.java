@@ -1,6 +1,7 @@
 package filmoteka.norles.github.com.filmoteka;
 
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ import retrofit2.Response;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -52,13 +54,31 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         loadJSON();
 
+        initFavButton();
+    }
+
+    private void initFavButton() {
         favButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Settings.getInstance().addFavourite(id);
 //                Settings.getInstance().saveFavourites();
+                changeFavBtnColor();
             }
         });
+
+        changeFavBtnColor();
+    }
+
+    private void changeFavBtnColor() {
+        List<Integer> favourites = Settings.getInstance().getFavourites();
+        if (favourites.contains(id)){
+            favButton.setBackgroundColor(Color.RED);
+            favButton.setText(R.string.remove_from_fav);
+        } else {
+            favButton.setBackgroundColor(Color.GREEN);
+            favButton.setText(R.string.add_to_fav);
+        }
     }
 
     void loadJSON(){
