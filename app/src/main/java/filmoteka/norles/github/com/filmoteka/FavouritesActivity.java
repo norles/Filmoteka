@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import filmoteka.norles.github.com.filmoteka.models.MovieDetail;
+import filmoteka.norles.github.com.filmoteka.models.MovieItem;
 import filmoteka.norles.github.com.filmoteka.models.SearchItem;
 import filmoteka.norles.github.com.filmoteka.models.SearchResult;
 import filmoteka.norles.github.com.filmoteka.network.Client;
@@ -30,8 +31,9 @@ public class FavouritesActivity extends AppCompatActivity {
     private static final String TAG = FavouritesActivity.class.getName();
 
     private RecyclerView recyclerView;
+    private MovieAdapter movieAdapter;
 
-    private List<MovieDetail> movies;
+    private List<MovieItem> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +42,26 @@ public class FavouritesActivity extends AppCompatActivity {
         setTitle(R.string.favourites);
 
         initView();
-        loadJSON();
     }
 
     void initView() {
         recyclerView = findViewById(R.id.favourites_recycle_view);
 
-//        SearchAdapter adapter = new SearchAdapter(this, items);
-//
-//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-//            recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-//        } else {
-//            recyclerView.setLayoutManager(new GridLayoutManager(this,4));
-//        }
+        movies = new ArrayList<>();
 
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
+        movieAdapter = new MovieAdapter(this, movies);
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(this,4));
+        }
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(movieAdapter);
+        movieAdapter.notifyDataSetChanged();
+
+        loadJSON();
     }
 
     void loadJSON() {
@@ -70,20 +75,22 @@ public class FavouritesActivity extends AppCompatActivity {
 
         for (Integer id :
                 favourites) {
-            Call<MovieDetail> call = service.getMovieDetail(id, BuildConfig.MOVIE_DB_KEY);
+            Call<MovieItem> call = service.getMovieItemId(id, BuildConfig.MOVIE_DB_KEY);
 
-            call.enqueue(new Callback<MovieDetail>() {
+            call.enqueue(new Callback<MovieItem>() {
                 @Override
-                public void onResponse(Call<MovieDetail> call, Response<MovieDetail> response) {
+                public void onResponse(Call<MovieItem> call, Response<MovieItem> response) {
                     if (response.isSuccessful()){
-                        MovieDetail movie = response.body();
+                        MovieItem movie = response.body();
                         movies.add(movie);
                         Log.d(TAG, movie.getTitle());
+
+                        recyclerView.setAdapter(new MovieAdapter(getApplicationContext(), movies));
                     }
                 }
 
                 @Override
-                public void onFailure(Call<MovieDetail> call, Throwable t) {
+                public void onFailure(Call<MovieItem> call, Throwable t) {
                     Log.e(TAG, t.getMessage());
                 }
             });
