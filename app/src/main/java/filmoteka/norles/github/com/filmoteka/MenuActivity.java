@@ -13,6 +13,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private LinearLayout menu_1;
     private LinearLayout menu_2;
+    private LinearLayout menu_3;
 
     private LinearLayout menu_exit;
 
@@ -25,6 +26,7 @@ public class MenuActivity extends AppCompatActivity {
 
         menu_1 = findViewById(R.id.menu_1);
         menu_2 = findViewById(R.id.menu_2);
+        menu_3 = findViewById(R.id.menu_3);
         menu_exit = findViewById(R.id.menu_exit);
 
         initViews();
@@ -41,6 +43,12 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 changeActivity(PeopleActivity.class);
+            }
+        });
+        menu_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeActivity(SearchActivity.class);
             }
         });
         menu_exit.setOnClickListener(new View.OnClickListener() {
