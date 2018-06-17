@@ -31,6 +31,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView titleView;
+    private Integer id;
 
 
 
@@ -38,6 +39,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
+        id = getIntent().getIntExtra("id", 0);
 
         imageView = findViewById(R.id.movie_detail_thumbnail);
         titleView = findViewById(R.id.movie_detail_title);
@@ -51,7 +54,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .getRetrofit()
                 .create(MovieService.class);
 
-        Call<MovieDetail> call = service.getMovieDetail(383498,BuildConfig.MOVIE_DB_KEY);
+        Call<MovieDetail> call = service.getMovieDetail(id,BuildConfig.MOVIE_DB_KEY);
 
         call.enqueue(new Callback<MovieDetail>() {
             @Override

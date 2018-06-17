@@ -35,6 +35,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         MovieItem result = results.get(position);
 
+        holder.id = result.getId();
+
         holder.title.setText(result.getOriginalTitle());
 
         Glide.with(mContext)
@@ -52,6 +54,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
 
+        public Integer id;
         public TextView title;
         public ImageView thumbnail;
 
@@ -65,6 +68,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, MovieDetailActivity.class);
+                    intent.putExtra("id",id);
                     mContext.startActivity(intent);
                 }
             });
