@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import filmoteka.norles.github.com.filmoteka.models.MovieDetail;
 import filmoteka.norles.github.com.filmoteka.models.SearchItem;
 import filmoteka.norles.github.com.filmoteka.models.SearchResult;
 import filmoteka.norles.github.com.filmoteka.network.Client;
@@ -30,9 +31,7 @@ public class FavouritesActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    private String query = "";
-
-    private List<SearchItem> items;
+    private List<MovieDetail> movies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,61 +40,54 @@ public class FavouritesActivity extends AppCompatActivity {
         setTitle(R.string.favourites);
 
         initView();
+        loadJSON();
     }
 
     void initView() {
         recyclerView = findViewById(R.id.favourites_recycle_view);
 
-        SearchAdapter adapter = new SearchAdapter(this, items);
+//        SearchAdapter adapter = new SearchAdapter(this, items);
+//
+//        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+//            recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+//        } else {
+//            recyclerView.setLayoutManager(new GridLayoutManager(this,4));
+//        }
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(this,4));
-        }
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
     }
 
     void loadJSON() {
-        items = new ArrayList<>();
+        movies = new ArrayList<>();
 
         MovieService service = Client
                 .getRetrofit()
                 .create(MovieService.class);
 
-        Call<SearchResult> call = service.getSearchResults(BuildConfig.MOVIE_DB_KEY, query);
+        List<Integer> favourites = Settings.getInstance().getFavourites();
 
-        call.enqueue(new Callback<SearchResult>() {
-            @Override
-            public void onResponse(Call<SearchResult> call, Response<SearchResult> response) {
-                if (response.isSuccessful()) {
-                    SearchResult searchResult = response.body();
-                    List<SearchItem> items = searchResult.getResults();
+        for (Integer id :
+                favourites) {
+            Call<MovieDetail> call = service.getMovieDetail(id, BuildConfig.MOVIE_DB_KEY);
 
-                    Log.d(TAG, String.valueOf(searchResult.getTotalResults()));
-                    Log.d(TAG, String.valueOf(items.size()));
-                    Iterator<SearchItem> iter = items.iterator();
-
-                    while (iter.hasNext()){
-                        SearchItem item = iter.next();
-                        if (item.getTitle() == null || item.getId()== null) {
-                            iter.remove();
-                        }
+            call.enqueue(new Callback<MovieDetail>() {
+                @Override
+                public void onResponse(Call<MovieDetail> call, Response<MovieDetail> response) {
+                    if (response.isSuccessful()){
+                        MovieDetail movie = response.body();
+                        movies.add(movie);
+                        Log.d(TAG, movie.getTitle());
                     }
-
-                    recyclerView.setAdapter(new SearchAdapter(getApplicationContext(), items));
                 }
-            }
 
-            @Override
-            public void onFailure(Call<SearchResult> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
-            }
-        });
-
+                @Override
+                public void onFailure(Call<MovieDetail> call, Throwable t) {
+                    Log.e(TAG, t.getMessage());
+                }
+            });
+        }
 
     }
 }
