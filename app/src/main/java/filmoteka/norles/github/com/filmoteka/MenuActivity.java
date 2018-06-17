@@ -25,6 +25,8 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        Settings.getInstance().setContext(this);
+
         menu_1 = findViewById(R.id.menu_1);
         menu_2 = findViewById(R.id.menu_2);
         menu_3 = findViewById(R.id.menu_3);
