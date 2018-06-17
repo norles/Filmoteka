@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/viewBg"
-        tools:context="filmoteka.norles.github.com.filmoteka.PeopleActivity"
+        tools:context="filmoteka.norles.github.com.filmoteka.activities.PeopleActivity"
         tools:showIn="@layout/activity_people">
 
     <android.support.v7.widget.RecyclerView

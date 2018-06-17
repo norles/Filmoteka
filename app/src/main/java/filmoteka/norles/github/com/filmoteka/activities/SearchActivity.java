@@ -1,4 +1,4 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -12,8 +12,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SearchView;
-import filmoteka.norles.github.com.filmoteka.models.MovieItem;
+import filmoteka.norles.github.com.filmoteka.BuildConfig;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.adapters.SearchAdapter;
 import filmoteka.norles.github.com.filmoteka.models.SearchItem;
 import filmoteka.norles.github.com.filmoteka.models.SearchResult;
 import filmoteka.norles.github.com.filmoteka.network.Client;

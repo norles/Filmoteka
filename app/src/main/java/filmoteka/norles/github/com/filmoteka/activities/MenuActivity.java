@@ -1,11 +1,12 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.Settings;
 
 public class MenuActivity extends AppCompatActivity {
 

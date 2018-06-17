@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cardview_light_background"
-        tools:context="filmoteka.norles.github.com.filmoteka.FavouritesActivity"
+        tools:context="filmoteka.norles.github.com.filmoteka.activities.FavouritesActivity"
         tools:showIn="@layout/activity_favourites">
 
     <ScrollView

@@ -1,23 +1,19 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import filmoteka.norles.github.com.filmoteka.models.MovieDetail;
+import filmoteka.norles.github.com.filmoteka.BuildConfig;
+import filmoteka.norles.github.com.filmoteka.R;
 import filmoteka.norles.github.com.filmoteka.models.TvDetail;
 import filmoteka.norles.github.com.filmoteka.network.Client;
 import filmoteka.norles.github.com.filmoteka.network.MovieService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import java.util.List;
 
 public class TvDetailActivity extends AppCompatActivity {
 
@@ -49,7 +45,7 @@ public class TvDetailActivity extends AppCompatActivity {
                 .getRetrofit()
                 .create(MovieService.class);
 
-        Call<TvDetail> call = service.getTvShowDetail(id,BuildConfig.MOVIE_DB_KEY);
+        Call<TvDetail> call = service.getTvShowDetail(id, BuildConfig.MOVIE_DB_KEY);
 
         call.enqueue(new Callback<TvDetail>() {
             @Override

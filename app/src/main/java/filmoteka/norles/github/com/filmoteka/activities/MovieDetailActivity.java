@@ -1,32 +1,25 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import filmoteka.norles.github.com.filmoteka.BuildConfig;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.Settings;
 import filmoteka.norles.github.com.filmoteka.models.MovieDetail;
-import filmoteka.norles.github.com.filmoteka.models.MovieItem;
-import filmoteka.norles.github.com.filmoteka.models.MovieResponse;
 import filmoteka.norles.github.com.filmoteka.network.Client;
 import filmoteka.norles.github.com.filmoteka.network.MovieService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -87,7 +80,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .getRetrofit()
                 .create(MovieService.class);
 
-        Call<MovieDetail> call = service.getMovieDetail(id,BuildConfig.MOVIE_DB_KEY);
+        Call<MovieDetail> call = service.getMovieDetail(id, BuildConfig.MOVIE_DB_KEY);
 
         call.enqueue(new Callback<MovieDetail>() {
             @Override

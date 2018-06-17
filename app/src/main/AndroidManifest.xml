@@ -12,28 +12,28 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity">
+        <activity android:name=".activities.MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
         </activity>
-        <activity android:name=".PeopleActivity">
+        <activity android:name=".activities.PeopleActivity">
         </activity>
-        <activity android:name=".MovieDetailActivity">
+        <activity android:name=".activities.MovieDetailActivity">
         </activity>
-        <activity android:name=".PersonDetailActivity">
+        <activity android:name=".activities.PersonDetailActivity">
         </activity>
-        <activity android:name=".SearchActivity">
+        <activity android:name=".activities.SearchActivity">
         </activity>
-        <activity android:name=".FavouritesActivity">
+        <activity android:name=".activities.FavouritesActivity">
         </activity>
-        <activity android:name=".TvActivity">
+        <activity android:name=".activities.TvActivity">
         </activity>
-        <activity android:name=".TvDetailActivity">
+        <activity android:name=".activities.TvDetailActivity">
         </activity>
     </application>
 

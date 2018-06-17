@@ -1,16 +1,19 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
 import android.content.res.Configuration;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ProgressBar;
-import filmoteka.norles.github.com.filmoteka.models.PeopleResponse;
-import filmoteka.norles.github.com.filmoteka.models.PersonItem;
+import filmoteka.norles.github.com.filmoteka.BuildConfig;
+import filmoteka.norles.github.com.filmoteka.adapters.MovieAdapter;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.models.MovieResponse;
+import filmoteka.norles.github.com.filmoteka.models.MovieItem;
 import filmoteka.norles.github.com.filmoteka.network.Client;
 import filmoteka.norles.github.com.filmoteka.network.MovieService;
 import retrofit2.Call;
@@ -19,38 +22,38 @@ import retrofit2.Response;
 
 import java.util.List;
 
-public class PeopleActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = PeopleActivity.class.getName();
+    private static final String TAG = MainActivity.class.getName();
 
     private RecyclerView recyclerView;
-    private PersonAdapter personAdapter;
-    private List<PersonItem> people;
+    private MovieAdapter movieAdapter;
+    private List<MovieItem> results;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_people);
+        setContentView(R.layout.activity_main);
 
         initViews();
 
-        swipeRefreshLayout = findViewById(R.id.poeple_content);
+        swipeRefreshLayout = findViewById(R.id.main_content);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 initViews();
-                Log.d(TAG, "REFRESH 2222!!!!!!");
+                Log.d(TAG, "REFRESH!!!!!!");
             }
         });
 
     }
 
     private void initViews() {
-        recyclerView = findViewById(R.id.people_recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
 
-        personAdapter = new PersonAdapter(this, people);
+        movieAdapter = new MovieAdapter(this, results);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             recyclerView.setLayoutManager(new GridLayoutManager(this,2));
@@ -59,34 +62,26 @@ public class PeopleActivity extends AppCompatActivity {
         }
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(personAdapter);
-        personAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(movieAdapter);
+        movieAdapter.notifyDataSetChanged();
 
         loadJSON();
     }
 
     void loadJSON(){
 
-        Log.d(TAG, "Load json");
         MovieService service = Client
                 .getRetrofit()
                 .create(MovieService.class);
 
-        Call<PeopleResponse> call = service.getPopularPeople(BuildConfig.MOVIE_DB_KEY);
-        call.enqueue(new Callback<PeopleResponse>() {
+        Call<MovieResponse> call = service.getPopularMovies(BuildConfig.MOVIE_DB_KEY);
+        call.enqueue(new Callback<MovieResponse>() {
             @Override
-            public void onResponse(Call<PeopleResponse> call, Response<PeopleResponse> response) {
-                Log.d(TAG, "call ");
+            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
                 if (response.isSuccessful()){
-                    Log.d(TAG, "Succesful");
-                    people = response.body().getResults();
+                    List<MovieItem> results = response.body().getResults();
 
-                    for (PersonItem i :
-                            people) {
-                        Log.d(TAG, i.getName());
-                    }
-
-                    recyclerView.setAdapter(new PersonAdapter(getApplicationContext(), people));
+                    recyclerView.setAdapter(new MovieAdapter(getApplicationContext(), results));
                     recyclerView.smoothScrollToPosition(0);
                     if (swipeRefreshLayout.isRefreshing()){
                         swipeRefreshLayout.setRefreshing(false);
@@ -95,8 +90,8 @@ public class PeopleActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<PeopleResponse> call, Throwable t) {
-                Log.e(TAG, t.getMessage());
+            public void onFailure(Call<MovieResponse> call, Throwable t) {
+
             }
         });
 

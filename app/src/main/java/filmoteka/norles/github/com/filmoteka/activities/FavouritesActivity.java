@@ -1,6 +1,5 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
-import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +7,11 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import filmoteka.norles.github.com.filmoteka.models.MovieDetail;
+import filmoteka.norles.github.com.filmoteka.BuildConfig;
+import filmoteka.norles.github.com.filmoteka.adapters.MovieAdapter;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.Settings;
 import filmoteka.norles.github.com.filmoteka.models.MovieItem;
-import filmoteka.norles.github.com.filmoteka.models.SearchItem;
-import filmoteka.norles.github.com.filmoteka.models.SearchResult;
 import filmoteka.norles.github.com.filmoteka.network.Client;
 import filmoteka.norles.github.com.filmoteka.network.MovieService;
 import retrofit2.Call;
@@ -23,7 +19,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class FavouritesActivity extends AppCompatActivity {

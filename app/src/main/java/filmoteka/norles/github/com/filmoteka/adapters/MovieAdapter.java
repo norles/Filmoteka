@@ -1,4 +1,4 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,56 +9,57 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import filmoteka.norles.github.com.filmoteka.models.PersonItem;
-import filmoteka.norles.github.com.filmoteka.models.SearchItem;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.activities.MovieDetailActivity;
+import filmoteka.norles.github.com.filmoteka.models.MovieItem;
 
 import java.util.List;
 
-public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private Context mContext;
-    private List<SearchItem> items;
+    private List<MovieItem> results;
 
-    public SearchAdapter(Context mContext, List<SearchItem> items) {
+    public MovieAdapter(Context mContext, List<MovieItem> results) {
         this.mContext = mContext;
-        this.items = items;
+        this.results = results;
     }
 
     @Override
-    public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_card, parent, false);
-        return new SearchViewHolder(view);
+        return new MovieViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(SearchViewHolder holder, int position) {
-        SearchItem item = items.get(position);
+    public void onBindViewHolder(MovieViewHolder holder, int position) {
+        MovieItem result = results.get(position);
 
-        holder.id = item.getId();
+        holder.id = result.getId();
 
-        holder.title.setText(item.getTitle());
+        holder.title.setText(result.getOriginalTitle());
 
         Glide.with(mContext)
-                .load(item.getBackdropPath())
+                .load(result.getPosterPath())
                 .placeholder(R.drawable.placeholder)
                 .into(holder.thumbnail);
     }
 
     @Override
     public int getItemCount() {
-        if (items==null)
+        if (results==null)
             return 0;
-        return items.size();
+        return results.size();
     }
 
-    class SearchViewHolder extends RecyclerView.ViewHolder {
+    class MovieViewHolder extends RecyclerView.ViewHolder {
 
         public Integer id;
         public TextView title;
         public ImageView thumbnail;
 
-        public SearchViewHolder(View itemView) {
+        public MovieViewHolder(View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.movie_title);

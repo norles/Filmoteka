@@ -1,4 +1,4 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,8 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import filmoteka.norles.github.com.filmoteka.models.MovieDetail;
+import filmoteka.norles.github.com.filmoteka.BuildConfig;
+import filmoteka.norles.github.com.filmoteka.R;
 import filmoteka.norles.github.com.filmoteka.models.PersonDetail;
 import filmoteka.norles.github.com.filmoteka.network.Client;
 import filmoteka.norles.github.com.filmoteka.network.MovieService;
@@ -44,7 +45,7 @@ public class PersonDetailActivity extends AppCompatActivity {
                 .getRetrofit()
                 .create(MovieService.class);
 
-        Call<PersonDetail> call = service.getPersonDetail(id,BuildConfig.MOVIE_DB_KEY);
+        Call<PersonDetail> call = service.getPersonDetail(id, BuildConfig.MOVIE_DB_KEY);
 
         call.enqueue(new Callback<PersonDetail>() {
             @Override

@@ -1,4 +1,4 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,29 +9,31 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.activities.MovieDetailActivity;
 import filmoteka.norles.github.com.filmoteka.models.SearchItem;
 
 import java.util.List;
 
-public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.FavouritesViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
 
     private Context mContext;
     private List<SearchItem> items;
 
-    public FavouritesAdapter(Context mContext, List<SearchItem> items) {
+    public SearchAdapter(Context mContext, List<SearchItem> items) {
         this.mContext = mContext;
         this.items = items;
     }
 
     @Override
-    public FavouritesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SearchViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_card, parent, false);
-        return new FavouritesViewHolder(view);
+        return new SearchViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(FavouritesViewHolder holder, int position) {
+    public void onBindViewHolder(SearchViewHolder holder, int position) {
         SearchItem item = items.get(position);
 
         holder.id = item.getId();
@@ -51,13 +53,13 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Fa
         return items.size();
     }
 
-    class FavouritesViewHolder extends RecyclerView.ViewHolder {
+    class SearchViewHolder extends RecyclerView.ViewHolder {
 
         public Integer id;
         public TextView title;
         public ImageView thumbnail;
 
-        public FavouritesViewHolder(View itemView) {
+        public SearchViewHolder(View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.movie_title);

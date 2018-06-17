@@ -1,4 +1,4 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
-import filmoteka.norles.github.com.filmoteka.models.MovieItem;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.activities.TvDetailActivity;
 import filmoteka.norles.github.com.filmoteka.models.TvItem;
 
 import java.util.List;

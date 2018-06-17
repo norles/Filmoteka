@@ -1,4 +1,4 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,13 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.style.BulletSpan;
 import android.util.Log;
 import android.widget.ProgressBar;
-import filmoteka.norles.github.com.filmoteka.models.MovieItem;
-import filmoteka.norles.github.com.filmoteka.models.MovieResponse;
-import filmoteka.norles.github.com.filmoteka.models.TvItem;
-import filmoteka.norles.github.com.filmoteka.models.TvResponse;
+import filmoteka.norles.github.com.filmoteka.BuildConfig;
+import filmoteka.norles.github.com.filmoteka.adapters.PersonAdapter;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.models.PeopleResponse;
+import filmoteka.norles.github.com.filmoteka.models.PersonItem;
 import filmoteka.norles.github.com.filmoteka.network.Client;
 import filmoteka.norles.github.com.filmoteka.network.MovieService;
 import retrofit2.Call;
@@ -22,39 +22,38 @@ import retrofit2.Response;
 
 import java.util.List;
 
-public class TvActivity extends AppCompatActivity {
+public class PeopleActivity extends AppCompatActivity {
 
-    private static final String TAG = TvActivity.class.getName();
+    private static final String TAG = PeopleActivity.class.getName();
 
     private RecyclerView recyclerView;
-    private MovieAdapter movieAdapter;
-    private List<MovieItem> results;
+    private PersonAdapter personAdapter;
+    private List<PersonItem> people;
     private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tv);
-        setTitle(R.string.best_tv_shows);
+        setContentView(R.layout.activity_people);
 
         initViews();
 
-        swipeRefreshLayout = findViewById(R.id.tv_swipe_layout);
+        swipeRefreshLayout = findViewById(R.id.poeple_content);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 initViews();
-                Log.d(TAG, "REFRESH!!!!!!");
+                Log.d(TAG, "REFRESH 2222!!!!!!");
             }
         });
 
     }
 
     private void initViews() {
-        recyclerView = findViewById(R.id.tv_recycler_view);
+        recyclerView = findViewById(R.id.people_recycler_view);
 
-        movieAdapter = new MovieAdapter(this, results);
+        personAdapter = new PersonAdapter(this, people);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             recyclerView.setLayoutManager(new GridLayoutManager(this,2));
@@ -63,27 +62,34 @@ public class TvActivity extends AppCompatActivity {
         }
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(movieAdapter);
-        movieAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(personAdapter);
+        personAdapter.notifyDataSetChanged();
 
         loadJSON();
     }
 
     void loadJSON(){
 
+        Log.d(TAG, "Load json");
         MovieService service = Client
                 .getRetrofit()
                 .create(MovieService.class);
 
-        Call<TvResponse> call = service.getBestTvShows(BuildConfig.MOVIE_DB_KEY);
-
-        call.enqueue(new Callback<TvResponse>() {
+        Call<PeopleResponse> call = service.getPopularPeople(BuildConfig.MOVIE_DB_KEY);
+        call.enqueue(new Callback<PeopleResponse>() {
             @Override
-            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+            public void onResponse(Call<PeopleResponse> call, Response<PeopleResponse> response) {
+                Log.d(TAG, "call ");
                 if (response.isSuccessful()){
-                    List<TvItem> results = response.body().getResults();
+                    Log.d(TAG, "Succesful");
+                    people = response.body().getResults();
 
-                    recyclerView.setAdapter(new TvAdapter(getApplicationContext(), results));
+                    for (PersonItem i :
+                            people) {
+                        Log.d(TAG, i.getName());
+                    }
+
+                    recyclerView.setAdapter(new PersonAdapter(getApplicationContext(), people));
                     recyclerView.smoothScrollToPosition(0);
                     if (swipeRefreshLayout.isRefreshing()){
                         swipeRefreshLayout.setRefreshing(false);
@@ -92,8 +98,8 @@ public class TvActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<TvResponse> call, Throwable t) {
-                Log.d(TAG, t.getMessage());
+            public void onFailure(Call<PeopleResponse> call, Throwable t) {
+                Log.e(TAG, t.getMessage());
             }
         });
 

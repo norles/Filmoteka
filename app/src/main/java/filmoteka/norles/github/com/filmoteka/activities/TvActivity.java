@@ -1,16 +1,21 @@
-package filmoteka.norles.github.com.filmoteka;
+package filmoteka.norles.github.com.filmoteka.activities;
 
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ProgressBar;
-import filmoteka.norles.github.com.filmoteka.models.MovieResponse;
+import filmoteka.norles.github.com.filmoteka.BuildConfig;
+import filmoteka.norles.github.com.filmoteka.adapters.MovieAdapter;
+import filmoteka.norles.github.com.filmoteka.R;
+import filmoteka.norles.github.com.filmoteka.adapters.TvAdapter;
 import filmoteka.norles.github.com.filmoteka.models.MovieItem;
+import filmoteka.norles.github.com.filmoteka.models.TvItem;
+import filmoteka.norles.github.com.filmoteka.models.TvResponse;
 import filmoteka.norles.github.com.filmoteka.network.Client;
 import filmoteka.norles.github.com.filmoteka.network.MovieService;
 import retrofit2.Call;
@@ -19,9 +24,9 @@ import retrofit2.Response;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class TvActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getName();
+    private static final String TAG = TvActivity.class.getName();
 
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
@@ -32,11 +37,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_tv);
+        setTitle(R.string.best_tv_shows);
 
         initViews();
 
-        swipeRefreshLayout = findViewById(R.id.main_content);
+        swipeRefreshLayout = findViewById(R.id.tv_swipe_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.tv_recycler_view);
 
         movieAdapter = new MovieAdapter(this, results);
 
@@ -71,14 +77,15 @@ public class MainActivity extends AppCompatActivity {
                 .getRetrofit()
                 .create(MovieService.class);
 
-        Call<MovieResponse> call = service.getPopularMovies(BuildConfig.MOVIE_DB_KEY);
-        call.enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-                if (response.isSuccessful()){
-                    List<MovieItem> results = response.body().getResults();
+        Call<TvResponse> call = service.getBestTvShows(BuildConfig.MOVIE_DB_KEY);
 
-                    recyclerView.setAdapter(new MovieAdapter(getApplicationContext(), results));
+        call.enqueue(new Callback<TvResponse>() {
+            @Override
+            public void onResponse(Call<TvResponse> call, Response<TvResponse> response) {
+                if (response.isSuccessful()){
+                    List<TvItem> results = response.body().getResults();
+
+                    recyclerView.setAdapter(new TvAdapter(getApplicationContext(), results));
                     recyclerView.smoothScrollToPosition(0);
                     if (swipeRefreshLayout.isRefreshing()){
                         swipeRefreshLayout.setRefreshing(false);
@@ -87,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
-
+            public void onFailure(Call<TvResponse> call, Throwable t) {
+                Log.d(TAG, t.getMessage());
             }
         });
 
