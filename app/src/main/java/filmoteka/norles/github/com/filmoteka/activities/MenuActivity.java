@@ -10,7 +10,7 @@ import filmoteka.norles.github.com.filmoteka.Settings;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getName();
+    private static final String TAG = MovieActivity.class.getName();
 
     private LinearLayout menu_1;
     private LinearLayout menu_2;
@@ -43,7 +43,7 @@ public class MenuActivity extends AppCompatActivity {
         menu_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                changeActivity(MainActivity.class);
+                changeActivity(MovieActivity.class);
             }
         });
         menu_2.setOnClickListener(new View.OnClickListener() {

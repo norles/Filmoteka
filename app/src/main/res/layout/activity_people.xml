@@ -6,7 +6,7 @@
         android:id="@+id/poeple_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="filmoteka.norles.github.com.filmoteka.activities.MainActivity">
+        tools:context="filmoteka.norles.github.com.filmoteka.activities.MovieActivity">
 
     <include layout="@layout/content_people"/>
 

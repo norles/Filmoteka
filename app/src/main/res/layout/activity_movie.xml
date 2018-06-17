@@ -6,8 +6,8 @@
         android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="filmoteka.norles.github.com.filmoteka.activities.MainActivity">
+        tools:context="filmoteka.norles.github.com.filmoteka.activities.MovieActivity">
 
-    <include layout="@layout/content_main"/>
+    <include layout="@layout/content_movie"/>
 
 </android.support.v4.widget.SwipeRefreshLayout>
