@@ -8,6 +8,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDetailActivity extends AppCompatActivity {
@@ -33,7 +36,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView titleView;
     private Integer id;
 
-
+    private Button favButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         imageView = findViewById(R.id.movie_detail_thumbnail);
         titleView = findViewById(R.id.movie_detail_title);
 
+        favButton = findViewById(R.id.favourite_button);
+
         loadJSON();
+
+        favButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Settings.getInstance().addFavourite(id);
+//                Settings.getInstance().saveFavourites();
+            }
+        });
     }
 
     void loadJSON(){
