@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".TvActivity">
         </activity>
+        <activity android:name=".TvDetailActivity">
+        </activity>
     </application>
 
 </manifest>
