@@ -34,9 +34,15 @@ public interface MovieService {
     Call<PeopleResponse> getPopularPeople(@Query("api_key") String api_key);
 
 
-    @GET("discover/tv?sort_by=vote_average.desc")
+    @GET("discover/tv")
     Call<TvResponse> getBestTvShows(@Query("api_key") String api_key);
 
+
+    @GET("tv/{tv_id}")
+    Call<TvDetail> getTvShowDetail(
+            @Path("tv_id") Integer quiz_id,
+            @Query("api_key") String api_key
+    );
 
     @GET("search/movie")
     Call<SearchResult> getSearchResults(
