@@ -17,6 +17,12 @@ public interface MovieService {
             @Query("api_key") String api_key
     );
 
+    @GET("movie/{movie_id}")
+    Call<MovieItem> getMovieItemId(
+            @Path("movie_id") Integer quiz_id,
+            @Query("api_key") String api_key
+    );
+
     @GET("person/{person_id}")
     Call<PersonDetail> getPersonDetail(
             @Path("person_id") Integer person_id,
