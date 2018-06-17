@@ -52,6 +52,7 @@ public class Settings {
 
     public void addFavourite(Integer id) {
         if (favourites.contains(id)){
+            favourites.remove(id);
             return;
         }
 
