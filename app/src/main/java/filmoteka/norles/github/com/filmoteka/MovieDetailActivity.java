@@ -8,7 +8,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import com.bumptech.glide.Glide;
 import filmoteka.norles.github.com.filmoteka.models.MovieDetail;
 import filmoteka.norles.github.com.filmoteka.models.MovieItem;
 import filmoteka.norles.github.com.filmoteka.models.MovieResponse;
@@ -26,10 +29,18 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private MovieDetail movieDetail;
 
+    private ImageView imageView;
+    private TextView titleView;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
+
+        imageView = findViewById(R.id.movie_detail_thumbnail);
+        titleView = findViewById(R.id.movie_detail_title);
 
         loadJSON();
     }
@@ -47,7 +58,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onResponse(Call<MovieDetail> call, Response<MovieDetail> response) {
                 if (response.isSuccessful()){
                     movieDetail = response.body();
-                    Log.d(TAG, movieDetail.getTitle());
+
+                    initView();
                 }
             }
 
@@ -56,6 +68,15 @@ public class MovieDetailActivity extends AppCompatActivity {
                 Log.e(TAG, t.getMessage());
             }
         });
+    }
 
+    void initView(){
+
+        Glide.with(this)
+                .load(movieDetail.getPosterPath())
+                .placeholder(R.drawable.placeholder)
+                .into(imageView);
+
+        titleView.setText(movieDetail.getTitle());
     }
 }
