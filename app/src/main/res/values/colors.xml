@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="viewBg">#777887</color>
     <color name="darkGreen">#008B00</color>
+    <color name="black">#000000</color>
 </resources>

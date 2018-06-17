@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="menu_text_size">30sp</dimen>
+    <dimen name="movie_detail_title_size">24sp</dimen>
+    <dimen name="movie_detail_text_size">20sp</dimen>
     <dimen name="menu_left_padding">30sp</dimen>
     <dimen name="person_img_height">250sp</dimen>
     <dimen name="button_padding">15sp</dimen>
+    <dimen name="detail_image_width">150sp</dimen>
+    <dimen name="detail_image_height">225sp</dimen>
 </resources>
