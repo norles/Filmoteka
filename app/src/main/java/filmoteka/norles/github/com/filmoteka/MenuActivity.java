@@ -40,7 +40,7 @@ public class MenuActivity extends AppCompatActivity {
         menu_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "opcja 2");
+                changeActivity(PeopleActivity.class);
             }
         });
         menu_exit.setOnClickListener(new View.OnClickListener() {
