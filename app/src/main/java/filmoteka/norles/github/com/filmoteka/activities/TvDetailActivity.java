@@ -22,7 +22,11 @@ public class TvDetailActivity extends AppCompatActivity {
     private TvDetail tvDetail;
 
     private ImageView imageView;
+
     private TextView titleView;
+    private TextView seasonsView;
+    private TextView descView;
+
     private Integer id;
 
     @Override
@@ -33,7 +37,10 @@ public class TvDetailActivity extends AppCompatActivity {
         id = getIntent().getIntExtra("id", 0);
 
         imageView = findViewById(R.id.tv_detail_thumbnail);
+
         titleView = findViewById(R.id.tv_detail_title);
+        seasonsView = findViewById(R.id.tv_detail_seasons);
+        descView = findViewById(R.id.tv_detail_desc);
 
         loadJSON();
 
@@ -73,5 +80,10 @@ public class TvDetailActivity extends AppCompatActivity {
                 .into(imageView);
 
         titleView.setText(tvDetail.getOriginalName());
+
+        String seasons = String.format("Seasons: %d",tvDetail.getNumberOfSeasons());
+        seasonsView.setText(seasons);
+
+        descView.setText(tvDetail.getOverview());
     }
 }
