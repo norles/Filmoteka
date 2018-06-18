@@ -36,6 +36,7 @@ public class PeopleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_people);
+        setTitle(R.string.popular_people);
 
         initViews();
 
