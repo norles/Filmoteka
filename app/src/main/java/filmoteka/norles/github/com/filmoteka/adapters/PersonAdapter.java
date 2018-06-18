@@ -42,7 +42,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
         Glide.with(mContext)
                 .load(person.getProfilePath())
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.person_placeholder)
                 .into(holder.img);
     }
 
