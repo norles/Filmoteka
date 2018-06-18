@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+// Aktywność wyświetlająca ekran wyszukiwania
 public class SearchActivity extends AppCompatActivity {
 
     private static final String TAG = SearchActivity.class.getName();

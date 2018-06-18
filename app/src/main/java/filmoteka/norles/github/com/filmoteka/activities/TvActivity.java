@@ -24,6 +24,7 @@ import retrofit2.Response;
 
 import java.util.List;
 
+// Aktywność wyświetlająca listę pnajlepszych seriali
 public class TvActivity extends AppCompatActivity {
 
     private static final String TAG = TvActivity.class.getName();

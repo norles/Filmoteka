@@ -15,6 +15,7 @@ import filmoteka.norles.github.com.filmoteka.models.TvItem;
 
 import java.util.List;
 
+// Adapter obsługujacy elementy dodawane do RecycleView
 public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvViewHolder> {
 
     private Context mContext;

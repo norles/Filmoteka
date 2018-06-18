@@ -7,6 +7,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
+// Lista wykorzystywanych zapytań do API
 public interface MovieService {
 
     @GET("movie/popular?language=pl")

@@ -22,6 +22,7 @@ import retrofit2.Response;
 
 import java.util.List;
 
+// Aktywność wyświetlająca listę popularnych filmow
 public class MovieActivity extends AppCompatActivity {
 
     private static final String TAG = MovieActivity.class.getName();
@@ -42,16 +43,18 @@ public class MovieActivity extends AppCompatActivity {
         initViews();
 
         swipeRefreshLayout = findViewById(R.id.main_content);
+        // Inicjacja listenera dla vidoku swipeRefresh,
+        // po odświeżeniu dane mają się ponownie pobrac z serwera
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 initViews();
-                Log.d(TAG, "REFRESH!!!!!!");
             }
         });
 
     }
 
+    // Metoda inicjuje elementy widoku
     private void initViews() {
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -70,13 +73,16 @@ public class MovieActivity extends AppCompatActivity {
         loadJSON();
     }
 
+    // Metoda pobierajaca dane z serwera
     void loadJSON(){
-
+        // Stworzenie serwisu za pomoca obiektu retrofit
         MovieService service = Client
                 .getRetrofit()
                 .create(MovieService.class);
 
+        // Definicja zapytania HTTP
         Call<MovieResponse> call = service.getPopularMovies(BuildConfig.MOVIE_DB_KEY);
+        // Asynchroniczne wykonanie zapytania
         call.enqueue(new Callback<MovieResponse>() {
             @Override
             public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {

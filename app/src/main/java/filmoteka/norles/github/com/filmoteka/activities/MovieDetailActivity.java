@@ -21,6 +21,7 @@ import retrofit2.Response;
 
 import java.util.List;
 
+// Aktywność wyświetlająca filmy zapisane do ulubionych
 public class MovieDetailActivity extends AppCompatActivity {
 
     private static final String TAG = MovieDetailActivity.class.getName();
@@ -60,7 +61,6 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Settings.getInstance().addFavourite(id);
-//                Settings.getInstance().saveFavourites();
                 changeFavBtnColor();
             }
         });
@@ -68,6 +68,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         changeFavBtnColor();
     }
 
+    // Metoda zmieniająca kolor oraz tekst przycisku w zależności
+    // czy  film jest w ulubionych
     private void changeFavBtnColor() {
         List<Integer> favourites = Settings.getInstance().getFavourites();
         if (favourites.contains(id)){
@@ -104,6 +106,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         });
     }
 
+    // Przypisanie danych pobranych z serwera do poszczegolnych elementow widoku
     void initView(){
         setTitle(movieDetail.getTitle());
 

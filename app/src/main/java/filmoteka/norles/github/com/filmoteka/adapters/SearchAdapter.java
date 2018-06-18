@@ -15,6 +15,7 @@ import filmoteka.norles.github.com.filmoteka.models.SearchItem;
 
 import java.util.List;
 
+// Adapter obsługujacy elementy dodawane do RecycleView
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
 
     private Context mContext;

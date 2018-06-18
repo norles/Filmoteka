@@ -21,6 +21,7 @@ import retrofit2.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+// Aktywność wyświetlająca filmy zapisane do ulubionych
 public class FavouritesActivity extends AppCompatActivity {
 
     private static final String TAG = FavouritesActivity.class.getName();
@@ -46,6 +47,7 @@ public class FavouritesActivity extends AppCompatActivity {
         initView();
     }
 
+    // Metoda inicjuje elementy widoku
     void initView() {
         recyclerView = findViewById(R.id.favourites_recycle_view);
 
@@ -66,7 +68,9 @@ public class FavouritesActivity extends AppCompatActivity {
         loadJSON();
     }
 
+    // metoda pobiera dane z serwera
     void loadJSON() {
+        // Stworzenie serwisu za pomoca obiektu retrofit
         MovieService service = Client
                 .getRetrofit()
                 .create(MovieService.class);
@@ -83,8 +87,8 @@ public class FavouritesActivity extends AppCompatActivity {
                     if (response.isSuccessful()){
                         MovieItem movie = response.body();
                         movies.add(movie);
-                        Log.d(TAG, movie.getTitle());
 
+                        // Przypisanie danych do adaptera
                         recyclerView.setAdapter(new MovieAdapter(getApplicationContext(), movies));
                     }
                 }

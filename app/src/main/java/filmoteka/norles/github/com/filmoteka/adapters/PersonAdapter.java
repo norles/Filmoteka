@@ -15,6 +15,7 @@ import filmoteka.norles.github.com.filmoteka.models.PersonItem;
 
 import java.util.List;
 
+// Adapter obsługujacy elementy dodawane do RecycleView
 public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonViewHolder> {
 
     private Context mContext;

@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import filmoteka.norles.github.com.filmoteka.R;
 import filmoteka.norles.github.com.filmoteka.Settings;
 
+// Aktywność wyświetlająca menu aplikacji
 public class MenuActivity extends AppCompatActivity {
 
     private static final String TAG = MovieActivity.class.getName();
@@ -29,6 +30,7 @@ public class MenuActivity extends AppCompatActivity {
 
         Settings.getInstance().setContext(this);
 
+        // Pobranie poszczegolnych widokow
         menu_1 = findViewById(R.id.menu_1);
         menu_2 = findViewById(R.id.menu_2);
         menu_3 = findViewById(R.id.menu_3);
@@ -36,10 +38,11 @@ public class MenuActivity extends AppCompatActivity {
         menu_5 = findViewById(R.id.menu_5);
         menu_exit = findViewById(R.id.menu_exit);
 
-        initViews();
+        // Metoda inicjujaca listenery dla poszczegolnych elementw menu
+        initViewsListener();
     }
 
-    private void initViews() {
+    private void initViewsListener() {
         menu_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +81,7 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
 
+    // Metoda zmieniajaca wyswietlajaca aktywnosc
     private void changeActivity(Class<?> activity){
         Intent intent = new Intent(this, activity);
         startActivity(intent);

@@ -22,6 +22,7 @@ import retrofit2.Response;
 
 import java.util.List;
 
+// Aktywność wyświetlająca listę popularnych aktorów
 public class PeopleActivity extends AppCompatActivity {
 
     private static final String TAG = PeopleActivity.class.getName();

@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.List;
 
+// sINGLETON umożliwiającY zapisywanie filmow w pamieci telefonu
 public class Settings {
     private static Settings ourInstance = new Settings();
 
@@ -17,7 +18,7 @@ public class Settings {
     }
 
     private final String PREFERENCES_FAVOURITE = "favourite_preferences";
-    private final String FAVOUTIRE_KEY = "favourite_key";
+    private final String FAVOURITE_KEY = "favourite_key";
 
     private List<Integer> favourites = new ArrayList<>();
 
@@ -31,27 +32,19 @@ public class Settings {
         readSavedFavourites();
     }
 
+    // Wczytywanie zapisanych ulubionych
     private void readSavedFavourites() {
         SharedPreferences shared = context.getSharedPreferences(PREFERENCES_FAVOURITE, Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor edit = shared.edit();
-
-        String json = shared.getString(FAVOUTIRE_KEY, "[]");
-
-        Log.d("READ", json);
+        String json = shared.getString(FAVOURITE_KEY, "[]");
 
         Gson gson = new Gson();
         favourites = gson.fromJson(json, new TypeToken<List<Integer>>() {
         }.getType());
-
-        for (Integer i :
-                favourites) {
-            Log.d("FAV", i.toString());
-        }
     }
 
+    // Dodawanie/usuwanie filmow z ulubionych
     public void addFavourite(Integer id) {
-        Log.d("SIZE", String.valueOf(favourites.size()));
         if (favourites.contains(id)){
             favourites.remove(id);
             saveFavourites();
@@ -63,6 +56,7 @@ public class Settings {
         saveFavourites();
     }
 
+    // Zapisywanie danych do pamieci telefonu
     private void saveFavourites() {
         Gson gson = new Gson();
 
@@ -71,9 +65,9 @@ public class Settings {
         SharedPreferences shared = context.getSharedPreferences(PREFERENCES_FAVOURITE, Context.MODE_PRIVATE);
 
         SharedPreferences.Editor edit = shared.edit();
-        edit.remove(FAVOUTIRE_KEY).apply();
+        edit.remove(FAVOURITE_KEY).apply();
 
-        edit.putString(FAVOUTIRE_KEY, json);
+        edit.putString(FAVOURITE_KEY, json);
         edit.apply();
 
     }

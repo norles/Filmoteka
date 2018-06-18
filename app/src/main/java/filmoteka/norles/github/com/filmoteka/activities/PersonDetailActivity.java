@@ -15,6 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+// Aktywność wyświetlająca widok szczegolwy o aktorze
 public class PersonDetailActivity extends AppCompatActivity {
 
     private static final String TAG = PersonDetailActivity.class.getName();

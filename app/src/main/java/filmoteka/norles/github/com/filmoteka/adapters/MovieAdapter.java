@@ -15,6 +15,7 @@ import filmoteka.norles.github.com.filmoteka.models.MovieItem;
 
 import java.util.List;
 
+// Adapter obsługujacy elementy dodawane do RecycleView
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private Context mContext;
@@ -25,6 +26,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.results = results;
     }
 
+    // Tworzenie Holdera - obiektu ktory bedzie reprezentowal jeden element recycleView
+    // przypisany do niego zostaje rownież widok dla pojedynczego elementu
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -32,6 +35,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return new MovieViewHolder(view);
     }
 
+    // Metoda wykonywana po utworzeniu holdera. W mozemy zdefiniowac
+    // jakie wartosci maja byc przypisane do widoku pojedynczego elementu
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         MovieItem result = results.get(position);
@@ -46,6 +51,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 .into(holder.thumbnail);
     }
 
+    // Zwraca liczbe elementow
     @Override
     public int getItemCount() {
         if (results==null)
@@ -53,18 +59,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return results.size();
     }
 
+    // Klasa reprezentujaca jeden element
     class MovieViewHolder extends RecyclerView.ViewHolder {
 
         public Integer id;
         public TextView title;
         public ImageView thumbnail;
 
+        // Jako parametr przyjmuje view - jest to widok dla poszczegolnego elementu
         public MovieViewHolder(View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.movie_title);
             thumbnail = itemView.findViewById(R.id.thumbnail);
 
+            // ClickListener - obsluga klikniecia w element,
+            // w tym przypadku otwarcie nowej aktywnosci
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
