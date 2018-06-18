@@ -22,7 +22,10 @@ public class PersonDetailActivity extends AppCompatActivity {
     private PersonDetail personDetail;
 
     private ImageView imageView;
+
     private TextView nameView;
+    private TextView birthdayView;
+    private TextView biographyView;
 
     private Integer id;
 
@@ -34,7 +37,10 @@ public class PersonDetailActivity extends AppCompatActivity {
         id = getIntent().getIntExtra("id", 0);
 
         imageView = findViewById(R.id.person_detail_img);
+
         nameView = findViewById(R.id.person_detail_name);
+        birthdayView = findViewById(R.id.person_detail_birthday);
+        biographyView = findViewById(R.id.person_detail_biography);
 
         loadJSON();
     }
@@ -65,12 +71,15 @@ public class PersonDetailActivity extends AppCompatActivity {
     }
 
     void initView(){
+        setTitle(personDetail.getName());
 
         Glide.with(this)
                 .load(personDetail.getProfilePath())
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.person_placeholder)
                 .into(imageView);
 
         nameView.setText(personDetail.getName());
+        birthdayView.setText("ur." + personDetail.getBirthday());
+        biographyView.setText(personDetail.getBiography());
     }
 }
