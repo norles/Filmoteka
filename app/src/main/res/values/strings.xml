@@ -11,4 +11,5 @@
     <string name="default_title">{movie_title}</string>
     <string name="default_name">{person_name}</string>
     <string name="default_birthday">2000-01-01</string>
+    <string name="default_tv_name">{tvshow_name}</string>
 </resources>
