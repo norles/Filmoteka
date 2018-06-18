@@ -51,8 +51,10 @@ public class Settings {
     }
 
     public void addFavourite(Integer id) {
+        Log.d("SIZE", String.valueOf(favourites.size()));
         if (favourites.contains(id)){
             favourites.remove(id);
+            saveFavourites();
             return;
         }
 
