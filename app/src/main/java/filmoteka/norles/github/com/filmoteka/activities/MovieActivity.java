@@ -36,6 +36,8 @@ public class MovieActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
+        setTitle(R.string.popular_movies);
+
 
         initViews();
 

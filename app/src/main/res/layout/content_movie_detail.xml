@@ -18,7 +18,7 @@
                 android:id="@+id/movie_detail_thumbnail"
                 android:layout_width="@dimen/detail_image_width"
                 android:layout_height="@dimen/detail_image_height"
-                android:src="@drawable/placeholder_movie_detail"/>
+                android:src="@drawable/placeholder"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
