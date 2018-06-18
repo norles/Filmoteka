@@ -39,6 +39,13 @@ public class FavouritesActivity extends AppCompatActivity {
         initView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initView();
+    }
+
     void initView() {
         recyclerView = findViewById(R.id.favourites_recycle_view);
 
@@ -60,8 +67,6 @@ public class FavouritesActivity extends AppCompatActivity {
     }
 
     void loadJSON() {
-        movies = new ArrayList<>();
-
         MovieService service = Client
                 .getRetrofit()
                 .create(MovieService.class);
