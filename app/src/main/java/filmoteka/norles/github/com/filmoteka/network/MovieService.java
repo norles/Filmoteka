@@ -24,7 +24,7 @@ public interface MovieService {
             @Query("api_key") String api_key
     );
 
-    @GET("person/{person_id}?language=pl")
+    @GET("person/{person_id}")
     Call<PersonDetail> getPersonDetail(
             @Path("person_id") Integer person_id,
             @Query("api_key") String api_key
