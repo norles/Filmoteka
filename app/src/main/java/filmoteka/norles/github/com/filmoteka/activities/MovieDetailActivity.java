@@ -29,8 +29,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView titleView;
-    private TextView durationView;
-    private TextView descriptionView;
     private Integer id;
 
     private Button favButton;
@@ -43,10 +41,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         id = getIntent().getIntExtra("id", 0);
 
         imageView = findViewById(R.id.movie_detail_thumbnail);
-
         titleView = findViewById(R.id.movie_detail_title);
-        durationView = findViewById(R.id.movie_detail_duration);
-        descriptionView = findViewById(R.id.movie_detail_desc);
 
         favButton = findViewById(R.id.favourite_button);
 
@@ -105,7 +100,6 @@ public class MovieDetailActivity extends AppCompatActivity {
     }
 
     void initView(){
-        setTitle(movieDetail.getTitle());
 
         Glide.with(this)
                 .load(movieDetail.getPosterPath())
@@ -113,10 +107,5 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(imageView);
 
         titleView.setText(movieDetail.getTitle());
-
-        int hours = movieDetail.getRuntime() / 60;
-        int minutes = movieDetail.getRuntime() % 60;
-        durationView.setText(String.format("%d godzin. %d minut.", hours, minutes));
-        descriptionView.setText(movieDetail.getOverview());
     }
 }
